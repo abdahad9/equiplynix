@@ -1,0 +1,150 @@
+import React, { useEffect, useMemo, useState } from 'react';
+import TableContainer from "../../Components/Common/TableContainerReactTable";
+import { Card, CardBody, CardHeader, Col, Container, Row, Button } from 'reactstrap'
+import { Link } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+
+const AllPartnerUsers = () => {
+    const navigate = useNavigate();
+  const defaultTable =
+    [
+      { id: "10", comapny_name: "Tyrone", contact_name: "tyrone@example.com", contact_email: "Senior", contact_phone: "Raynor", fein_no: "123", commision: "Senior", bank_name: "Raynor", bank_routing_no: "123",bank_account_no: "123" },
+      // { id: "09", name: "Cathy", email: "cathy@example.com", designation: "Customer Data Director", company: "Ebert, Schamberger and Johnston", location: "Mexico" },
+      // { id: "08", name: "Patsy", email: "patsy@example.com", designation: "Dynamic Assurance Director", company: "Streich Group", location: "Niue" },
+      // { id: "07", name: "Kerry", email: "kerry@example.com", designation: "Lead Applications Associate", company: "Feeney, Langworth and Tremblay", location: "Niger" },
+      // { id: "06", name: "Traci", email: "traci@example.com", designation: "Corporate Identity Director", company: "Koelpin - Goldner", location: "Vanuatu" },
+      // { id: "05", name: "Noel", email: "noel@example.com", designation: "Customer Data Director", company: "Howell - Rippin", location: "Germany" },
+      // { id: "04", name: "Robert", email: "robert@example.com", designation: "Product Accounts Technician", company: "Hoeger", location: "San Marino" },
+      // { id: "03", name: "Shannon", email: "shannon@example.com", designation: "Legacy Functionality Associate", company: "Zemlak Group", location: "South Georgia" },
+      // { id: "02", name: "Harold", email: "harold@example.com", designation: "Forward Creative Coordinator", company: "Metz Inc", location: "Iran" },
+      // { id: "01", name: "Jonathan", email: "jonathan@example.com", designation: "Senior Implementation Architect", company: "Hauck Inc", location: "Holy See" }
+    ]
+  const columns = useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: (cellProps : any) => {
+          return (
+            <span className="fw-semibold">{cellProps.id}</span>
+          )
+        },
+        disableFilters: true,
+        filterable: false,
+      },
+
+      {
+        Header: "Company Name",
+        accessor: "comapny_name",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Contact Name",
+        accessor: "contact_name",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Contact Email",
+        accessor: "contact_email",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Contact Phone",
+        accessor: "contact_phone",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "FEIN #",
+        accessor: "fein_no",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Commission",
+        accessor: "commision",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Bank Name",
+        accessor: "bank_name",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Bank Routing #",
+        accessor: "bank_routing_no",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Bank Account #",
+        accessor: "bank_account_no",
+        disableFilters: true,
+        filterable: false,
+      },
+      {
+        Header: "Action",
+        accessor: (cellProps : any) => {
+            return (
+                <div className="d-flex gap-2">
+                     <div className="view">
+                        <button className="btn btn-sm btn-info edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">View</button>
+                    </div>
+                    <div className="edit">
+                        <button className="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                    </div>
+                    <div className="remove">
+                        <button className="btn btn-sm btn-danger remove-item-btn">Remove</button>
+                    </div>
+                </div>
+            )
+          },
+        disableFilters: true,
+        filterable: false,
+      }
+    ],
+    []
+  );
+
+  return (
+    <React.Fragment>
+          <div className="page-content">
+        <Container fluid>
+            <Row>
+                <Col lg={12}>
+                    <Card>
+                        <CardHeader>
+                            <h5 className="card-title mb-0">All Partner Users</h5>
+                        </CardHeader>
+                            <CardBody>
+                                <TableContainer
+                                    columns={(columns || [])}
+                                    data={(defaultTable || [])}
+                                    handleUserClick= {() => {
+                                        navigate('/createuser');
+                                      }}
+                                    createButtonText="Create New Partner User"
+                                    isAddUserList={true}
+                                    iscustomPageSize={false}
+                                    isBordered={false}
+                                    customPageSize={8}
+                                    className="custom-header-css table align-middle table-nowrap"
+                                    tableClassName="table-centered align-middle table-nowrap mb-0"
+                                    theadClassName="text-muted table-light"
+                                    SearchPlaceholder='Search...'
+                                />
+                            </CardBody>
+                    </Card>
+                </Col>
+          </Row>
+        </Container>
+        </div>
+    </React.Fragment>
+  );
+};
+export default AllPartnerUsers;
