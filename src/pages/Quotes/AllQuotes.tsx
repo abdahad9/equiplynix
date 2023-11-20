@@ -1,12 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import TableContainer from "../../Components/Common/TableContainerReactTable";
-import { Card, CardBody, CardHeader, Col, Container, Row, Button } from 'reactstrap'
+import { Card, CardBody, CardHeader, Col, Container, Row, Button, Modal,ModalBody, ModalHeader, Input, Label } from 'reactstrap'
 import { Link } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 
 const AllQuotes = () => {
     const navigate = useNavigate();
+    const [modal, setModal] = useState<boolean>(false);
+
+    function tog_center() {
+      setModal(!modal);
+    }
   const defaultTable =
     [
       { id: "10", ref: "test", company: "test", partner: "test", rep: "test", timestamp: "test", cost: "test", term: "test", premium: "test", status: "test"  },
@@ -91,15 +96,12 @@ const AllQuotes = () => {
         Header: "Action",
         accessor: (cellProps : any) => {
             return (
-                <div className="d-flex gap-2">
-                     <div className="view">
-                        <button className="btn btn-sm btn-info edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">View</button>
-                    </div>
-                    <div className="edit">
-                        <button className="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
-                    </div>
-                    <div className="remove">
-                        <button className="btn btn-sm btn-danger remove-item-btn">Remove</button>
+                <div className="d-flex gap-1">
+                     <div className=""> 
+                     <button onClick={() => tog_center()} className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i className="ri-add-circle-line"></i></button>
+                    </div> 
+                    <div className="">
+                    <button className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i className="ri-file-pdf-line"></i></button>
                     </div>
                 </div>
             )
@@ -114,35 +116,61 @@ const AllQuotes = () => {
   return (
     <React.Fragment>
           <div className="page-content">
-        <Container fluid>
-            <Row>
-                <Col lg={12}>
-                    <Card>
-                        <CardHeader>
-                            <h5 className="card-title mb-0">All Quotes</h5>
-                        </CardHeader>
-                            <CardBody>
-                                <TableContainer
-                                    columns={(columns || [])}
-                                    data={(defaultTable || [])}
-                                    handleUserClick= {() => {
-                                        navigate('/createuser');
-                                      }}
-                                    createButtonText="Create New Quote"
-                                    isAddUserList={true}
-                                    iscustomPageSize={false}
-                                    isBordered={false}
-                                    customPageSize={8}
-                                    className="custom-header-css table align-middle table-nowrap"
-                                    tableClassName="table-centered align-middle table-nowrap mb-0"
-                                    theadClassName="text-muted table-light"
-                                    SearchPlaceholder='Search...'
-                                />
-                            </CardBody>
-                    </Card>
-                </Col>
-          </Row>
-        </Container>
+            <Container fluid>
+                <Row>
+                    <Col lg={12}>
+                        <Card>
+                            <CardHeader>
+                                <h5 className="card-title mb-0">All Quotes</h5>
+                            </CardHeader>
+                                <CardBody>
+                                    <TableContainer
+                                        columns={(columns || [])}
+                                        data={(defaultTable || [])}
+                                        handleUserClick= {() => {
+                                            navigate('/createquote');
+                                          }}
+                                        createButtonText="Create New Quote"
+                                        isAddUserList={true}
+                                        iscustomPageSize={false}
+                                        isBordered={false}
+                                        customPageSize={8}
+                                        className="custom-header-css table align-middle table-nowrap"
+                                        tableClassName="table-centered align-middle table-nowrap mb-0"
+                                        theadClassName="text-muted table-light"
+                                        SearchPlaceholder='Search...'
+                                    />
+                                </CardBody>
+                        </Card>
+                    </Col>
+              </Row>
+            </Container>
+            <Modal
+                isOpen={modal}
+                toggle={() => {
+                    tog_center();
+                }}
+                centered
+            >
+                <ModalHeader className="modal-title" />
+
+                <ModalBody className="text-center p-5">
+                    {/* <i className="ri-thumb-down-line display-5 text-danger"></i> */}
+                    <div className="mt-1">
+                        <h3 className="mb-5">STATUS INSURANCE QUOTE</h3>
+                          <div className="hstack gap-2 flex-wrap justify-content-center">
+                              <Input type="radio" className="btn-check" name="options-outlined" id="success-outlined" defaultChecked />
+                              <Label className="btn btn-outline-success" for="success-outlined">Accept</Label>
+                                <p>or</p>
+                              <Input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" />
+                              <Label className="btn btn-outline-danger" for="danger-outlined">Decline</Label>
+                          </div>
+                        <div className="hstack gap-2 justify-content-center mt-4">
+                            <Button color="primary" onClick={() => setModal(false)}>Submit</Button>
+                        </div>
+                    </div>
+                </ModalBody>
+            </Modal>
         </div>
     </React.Fragment>
   );

@@ -76,7 +76,7 @@ const authProtectedRoutes = [
 
     //Quotes
     { path: "/allquotes", component: <AllQuotes /> },
-    { path: "/createquotes", component: <CreateQuotes /> },
+    { path: "/createquote", component: <CreateQuotes /> },
     { path: "/editquotes", component: <EditQuotes/> },
     // { path: "/viewuser", component: <showUser/> },
 
