@@ -96,12 +96,12 @@ const AllQuotes = () => {
         Header: "Action",
         accessor: (cellProps : any) => {
             return (
-                <div className="d-flex gap-1">
-                     <div className=""> 
-                     <button onClick={() => tog_center()} className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i className="ri-add-circle-line"></i></button>
+                <div className="d-flex gap-0">
+                     <div> 
+                     <button style={{marginTop: "-10px"}} onClick={() => tog_center()} className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i style={{fontSize: "22px"}} className="ri-add-circle-line"></i></button>
                     </div> 
-                    <div className="">
-                    <button className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i className="ri-file-pdf-line"></i></button>
+                    <div>
+                    <button style={{marginTop: "-10px"}} className="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showModal"><i style={{fontSize: "22px"}} className="ri-file-pdf-line"></i></button>
                     </div>
                 </div>
             )
