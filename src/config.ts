@@ -29,7 +29,7 @@ const config: Config = {
   },
   api: {
     // API_URL: "http://localhost:4000/api/",
-    API_URL: "https://equiplynx-backend-3406b9c3d513.herokuapp.com",
+    API_URL: "https://equiplynx-backend-3406b9c3d513.herokuapp.com/api/",
   },
 };
 
